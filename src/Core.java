@@ -1,11 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Scanner;
+
 import org.apache.commons.io.FilenameUtils;
 
 public class Core {
@@ -17,8 +19,8 @@ public class Core {
 
     public Core(EnumMap<Flags, String> params) {
         this.fileSizes = new ArrayList<Long>();
-        this.linksFile = params.get(Flags.linksFile);
-        this.outputFolder = params.get(Flags.outputFolder);
+        this.linksFile = "links.txt";
+        this.outputFolder = "./";
         this.downloadLimit = params.get(Flags.downloadLimit);
         this.countThreads = params.get(Flags.countThreads) != null ? Integer.parseInt(params.get(Flags.countThreads)) : 0;
     }
@@ -29,6 +31,7 @@ public class Core {
         if (!checkFile())
             throw new Exception("File not exist/No data in file: " + this.linksFile);
         ArrayList<String> filesRecords = readFileDataToArrayListByLines(this.linksFile);
+
         for (String str : filesRecords) {
             //TODO
         	String[] parts;
@@ -38,11 +41,10 @@ public class Core {
         		name = getFileName(str);
         	else
         		name = parts[1];
-        		
-        	System.err.println(name);
+        	System.out.println("Download "+name+"...");
         	Downloader dwn = new Downloader(parts[0], name, System.getProperty("user.dir")+"\\"+this.outputFolder);
         	dwn.run();
-        }
+        }        
 
     }
 

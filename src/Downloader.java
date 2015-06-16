@@ -40,6 +40,7 @@ public class Downloader implements Runnable {
         try {
             assert fos != null;
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+            fos.close();
             //this.fileSizes.add(fos.getChannel().size());
         } catch (IOException e) {
             e.printStackTrace();
