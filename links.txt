@@ -1,0 +1,7 @@
+http://updater.ru/ver/1/file1_v1 file1_v1
+http://updater.ru/ver/1/file2_v1 file2_v1
+http://updater.ru/ver/2/file1_v2 file1_v2
+http://updater.ru/ver/2/file2_v2 file2_v2
+http://updater.ru/ver/3/file1_v3 file1_v3
+http://updater.ru/ver/3/file2_v3 file2_v3
+http://updater.ru/ver/3/file3_v1 file3_v1

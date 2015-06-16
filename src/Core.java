@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Scanner;
+import org.apache.commons.io.FilenameUtils;
 
 public class Core {
     protected final String linksFile;
@@ -30,6 +31,17 @@ public class Core {
         ArrayList<String> filesRecords = readFileDataToArrayListByLines(this.linksFile);
         for (String str : filesRecords) {
             //TODO
+        	String[] parts;
+        	String name = "";
+        	parts = str.split(" ");
+        	if (parts.length<2)
+        		name = getFileName(str);
+        	else
+        		name = parts[1];
+        		
+        	System.err.println(name);
+        	Downloader dwn = new Downloader(parts[0], name, System.getProperty("user.dir")+"\\"+this.outputFolder);
+        	dwn.run();
         }
 
     }
@@ -50,6 +62,10 @@ public class Core {
             return bytes > 0;
         }
         return false;
+    }
+    
+    private String getFileName(String url) {
+        return FilenameUtils.getBaseName(url) + "." + FilenameUtils.getExtension(url);
     }
 
     private ArrayList<String> readFileDataToArrayListByLines(String fileName) {
